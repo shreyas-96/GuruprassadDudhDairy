@@ -98,17 +98,21 @@
 
 .feature-card {
   padding: 40px;
-  border-radius: 20px;
-  background: #f8f9fa;
-  transition: all 0.3s ease;
-  border: 1px solid #e9ecef;
+  border-radius: 24px;
+  background: white;
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  border: 1px solid #f1f3f5;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .feature-card:hover {
-  transform: translateY(-10px);
-  background: white;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
-  border-color: #0077b6;
+  transform: translateY(-12px);
+  box-shadow: 0 20px 40px rgba(0, 119, 182, 0.1);
+  border-color: rgba(0, 119, 182, 0.2);
 }
 
 .feature-image {
@@ -131,14 +135,17 @@
 }
 
 .feature-card h3 {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
+  font-weight: 800;
   color: #1a1a1a;
   margin-bottom: 15px;
+  letter-spacing: -0.5px;
 }
 
 .feature-card p {
   color: #495057;
-  line-height: 1.6;
+  line-height: 1.7;
+  font-size: 1.05rem;
 }
 
 .cta-group {
