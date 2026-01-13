@@ -246,6 +246,18 @@
     align-items: center;
 }
 
+@media (max-width: 968px) {
+    .tradition-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .tradition-list li {
+        justify-content: center;
+    }
+}
+
 .marathi-heading {
     color: #fd7e14;
     font-weight: 800;
@@ -441,6 +453,10 @@
 }
 
 @media (max-width: 768px) {
+    .stats-section {
+        padding: 60px 5%;
+    }
+
     .tabs-container {
         flex-direction: column;
         align-items: stretch;
@@ -452,9 +468,29 @@
 
     .can-pour-animation {
         scale: 0.7;
+        flex-direction: column;
+        gap: 20px;
     }
 
     .marathi-tag {
         font-size: 1.3rem;
+    }
+
+    .farmer-animation-segment {
+        padding: 30px;
+    }
+
+    .pheta-icon,
+    .can-main,
+    .collection-tank {
+        font-size: 4rem;
+    }
+
+    .tradition-segment {
+        padding: 30px;
+    }
+
+    .tradition-text h3 {
+        font-size: 2rem;
     }
 }

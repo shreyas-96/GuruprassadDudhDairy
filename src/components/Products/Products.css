@@ -43,7 +43,7 @@
 
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 50px;
 }
 
@@ -467,5 +467,17 @@
 
     .contact-number {
         font-size: 1rem;
+    }
+
+    .section-header h2 {
+        font-size: 2rem;
+    }
+
+    .amount {
+        font-size: 2rem;
+    }
+
+    .product-info h3 {
+        font-size: 1.5rem;
     }
 }

@@ -80,6 +80,10 @@
 }
 
 @media (max-width: 768px) {
+    .footer {
+        padding: 60px 5% 30px;
+    }
+
     .footer-container {
         grid-template-columns: 1fr;
         gap: 50px;
