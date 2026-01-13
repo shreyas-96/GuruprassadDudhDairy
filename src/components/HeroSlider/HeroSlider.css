@@ -1,0 +1,209 @@
+.hero-slider {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: #000;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out, transform 1.5s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(1.1);
+}
+
+.slide.active {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 1;
+}
+
+.slide::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7));
+}
+
+.slide-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    max-width: 900px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transform: translateY(50px);
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.24, 1.12, 0.71, 0.98) 0.5s;
+}
+
+.slide.active .slide-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.slide-title {
+    font-size: clamp(2.5rem, 5vw, 3.8rem);
+    font-weight: 900;
+    margin-bottom: 20px;
+    letter-spacing: -0.7px;
+    background: linear-gradient(135deg, #fff 0%, #a5d8ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.5;
+}
+
+.slide-description {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    margin-bottom: 40px;
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+.slide-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-slider-primary {
+    padding: 15px 35px;
+    background: #1c7ed6;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(28, 126, 214, 0.4);
+}
+
+.btn-slider-primary:hover {
+    background: #1971c2;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(28, 126, 214, 0.5);
+}
+
+.btn-slider-secondary {
+    padding: 15px 35px;
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-slider-secondary:hover {
+    background: white;
+    color: #1c7ed6;
+    transform: translateY(-3px);
+}
+
+/* Navigation */
+.slider-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+
+.slider-nav:hover {
+    background: rgba(255, 255, 255, 0.3);
+    scale: 1.1;
+}
+
+.slider-nav.prev {
+    left: 30px;
+}
+
+.slider-nav.next {
+    right: 30px;
+}
+
+/* Dots */
+.slider-dots {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    z-index: 10;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    background: #1c7ed6;
+    width: 35px;
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .hero-slider {
+        height: 60vh;
+    }
+
+    .slide-title {
+        font-size: 2.5rem;
+    }
+
+    .slide-description {
+        font-size: 1rem;
+    }
+
+    .slider-nav {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+
+    .slide-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
