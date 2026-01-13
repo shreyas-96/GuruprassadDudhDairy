@@ -6,11 +6,11 @@ import HeroSlider from './components/HeroSlider/HeroSlider'
 import Products from './components/Products/Products'
 import CollectionStats from './components/CollectionStats/CollectionStats'
 import Gallery from './components/Gallery/Gallery'
+import WhatsAppButton from './components/WhatsAppButton/WhatsAppButton'
 import { useLanguage } from './context/LanguageContext'
 import { translations } from './translations/translations'
 
 function App() {
-  const [count, setCount] = useState(0)
   const { language } = useLanguage();
   const t = translations[language].features;
 
@@ -30,21 +30,21 @@ function App() {
         <div className="features-grid">
           <div className="feature-card">
             <div className="feature-image">
-              <img src="/dairy-quality.png" alt="Pure Milk" />
+              <img src="/dairy-quality.png" alt="Pure Milk" loading="lazy" />
             </div>
             <h3>{t.pureQuality.title}</h3>
             <p>{t.pureQuality.desc}</p>
           </div>
           <div className="feature-card">
             <div className="feature-image">
-              <img src="/safe-collection.png" alt="Safe Collection" />
+              <img src="/safe-collection.png" alt="Safe Collection" loading="lazy" />
             </div>
             <h3>{t.safeCollection.title}</h3>
             <p>{t.safeCollection.desc}</p>
           </div>
           <div className="feature-card">
             <div className="feature-image">
-              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000" alt="Digital Records" />
+              <img src="/dairy-hero.png" alt="Digital Records" loading="lazy" />
             </div>
             <h3>{t.digitalRecords.title}</h3>
             <p>{t.digitalRecords.desc}</p>
@@ -57,9 +57,10 @@ function App() {
       <Gallery />
 
       <Footer />
+
+      <WhatsAppButton />
     </div>
   )
 }
 
 export default App
-
