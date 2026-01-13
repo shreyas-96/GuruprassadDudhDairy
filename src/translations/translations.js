@@ -6,7 +6,7 @@ export const translations = {
             collections: "Collections",
             gallery: "Gallery",
             logoText: "Guruprasad Dudh Dairy,",
-            location: "Mauje Agar"
+            location: "Mouje Agar"
         },
         hero: {
             title: "Smart Dairy Collection",
