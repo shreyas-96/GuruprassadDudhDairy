@@ -1,31 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './CollectionStats.css';
 import { useLanguage } from '../../context/LanguageContext';
+import { useAdmin } from '../../context/AdminContext';
 import { translations } from '../../translations/translations';
 
 const CollectionStats = () => {
     const [activeTab, setActiveTab] = useState('morning');
     const { language } = useLanguage();
+    const { collection } = useAdmin();
     const t = translations[language].collectionBoard;
     const navT = translations[language].navbar;
 
-    // Specific Data Provided
-    const data = {
-        morning: {
-            buffalo: 110,
-            cow: 100,
-            total: 210,
-            time: '08:30 AM - 10:00 AM'
-        },
-        evening: {
-            buffalo: 90,
-            cow: 75,
-            total: 165,
-            time: '06:30 PM - 08:00 PM'
-        }
-    };
-
+    const data = collection;
     const currentData = data[activeTab];
+
 
     return (
         <section id="predictions" className="stats-section">
@@ -134,7 +122,7 @@ const CollectionStats = () => {
                     </div>
                 </div>
 
-                {/* Farmer Animation Segment */}
+                {/* Farmer Animation Segment 
                 <div className="farmer-animation-segment">
                     <div className="animation-box">
                         <div className="pheta-icon">👳‍♂️</div>
@@ -146,6 +134,7 @@ const CollectionStats = () => {
                         <div className="marathi-tag">{t.tagline}</div>
                     </div>
                 </div>
+                */}
             </div>
         </section>
     );

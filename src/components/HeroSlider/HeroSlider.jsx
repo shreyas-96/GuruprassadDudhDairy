@@ -57,6 +57,11 @@ const HeroSlider = () => {
                     style={{ backgroundImage: `url(${slide.image})` }}
                 >
                     <div className="slide-content">
+                        <div className="hero-floating-badges">
+                            <span className="h-badge">⭐ 100% Pure Milk</span>
+                            <span className="h-badge">🛡️ Quality Assured</span>
+                            <span className="h-badge">📍 Mouje Agar</span>
+                        </div>
                         <h1 className="slide-title">{slide.title}</h1>
                         <p className="slide-description">{slide.description}</p>
                         <div className="slide-actions">

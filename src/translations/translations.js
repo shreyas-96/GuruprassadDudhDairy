@@ -107,12 +107,33 @@ export const translations = {
             titleSpan: "Premium Gallery",
             desc: "Real glimpses of our daily collections and farm purity."
         },
+        calculator: {
+            title: "Smart Milk ",
+            titleSpan: "Payout Calculator",
+            subtitle: "Instant transparent rate & payout estimator for dairy farmers and consumers based on Fat %.",
+            milkType: "Milk Type",
+            cow: "Cow Milk",
+            buffalo: "Buffalo Milk",
+            quantity: "Milk Quantity (Liters)",
+            fat: "Fat Percentage (%)",
+            snf: "Est. SNF %",
+            ratePerLiter: "Estimated Rate / Liter",
+            totalPayout: "Total Estimated Payout",
+            shareWhatsapp: "Inquire Payout via WhatsApp",
+            badge: "Live FAT & SNF Calculator • Center 4503"
+        },
+        ticker: {
+            text: "🥛 Guruprasad Dudh Dairy - Mouje Agar • Center Code: 4503 • Daily Collection: 375 Liters • Morning: 08:30 AM - 10:00 AM | Evening: 06:30 PM - 08:00 PM"
+        },
         footer: {
             rights: "Guruprasad Dudh Dairy Collection. All rights reserved.",
             brandDesc: "Serving pure health to our community since decades.",
             addressTitle: "Our Address",
             addressContent: "Indrayani Chowk Mouje Agar, Tal. Shirol, Dist. Kolhapur - 416120",
-            contactTitle: "Contact Us"
+            contactTitle: "Contact Us",
+            timing: "Timing",
+            morning: "Morning",
+            evening: "Evening"
         }
     },
     mr: {
@@ -223,12 +244,33 @@ export const translations = {
             titleSpan: "प्रीमियम गॅलरी",
             desc: "आमच्या दैनंदिन संकलनाचे और शेतातील शुद्धतेचे वास्तविक दर्शन."
         },
+        calculator: {
+            title: "स्मार्ट दुध ",
+            titleSpan: "दर व बिल मोजणी",
+            subtitle: "फॅट % वर आधारित शेतकरी बंधूंसाठी आणि ग्राहकांसाठी झटपट पारदर्शक दर मोजणी.",
+            milkType: "दुधाचा प्रकार",
+            cow: "गाईचे दूध",
+            buffalo: "म्हशीचे दूध",
+            quantity: "दुधाचे प्रमाण (लिटर)",
+            fat: "फॅट प्रमाण (%)",
+            snf: "अंदाजित एस.एन.एफ (SNF) %",
+            ratePerLiter: "अंदाजित दर / लिटर",
+            totalPayout: "एकूण अंदाजित रक्कम",
+            shareWhatsapp: "व्हॉट्सॲपवर दर चौकशी करा",
+            badge: "लाइव्ह फॅट व बिल कॅल्क्युलेटर • केंद्र ४५०३"
+        },
+        ticker: {
+            text: "🥛 गुरुप्रसाद दुध डेअरी - मौजे आगर • केंद्र कोड: ४५०३ • दैनंदिन संकलन: ३७५ लिटर • सकाळ: ०८:३० AM - १०:०० AM | संध्याकाळ: ०६:३० PM - ०८:०० PM"
+        },
         footer: {
             rights: "गुरुप्रसाद दुध डेअरी कलेक्शन. सर्व हक्क राखीव.",
             brandDesc: "अनेक दशकांपासून आपल्या समाजाला शुद्ध आरोग्य सेवा देत आहोत.",
             addressTitle: "आमचा पत्ता",
             addressContent: "इंद्रायणी चौक मौजे आगर, ता. शिरोळ, जि. कोल्हापूर - ४१६१२०",
-            contactTitle: "संपर्क साधा"
+            contactTitle: "संपर्क साधा",
+            timing: "वेळ",
+            morning: "सकाळ",
+            evening: "संध्याकाळ"
         }
     }
 };

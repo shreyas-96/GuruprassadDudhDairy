@@ -1,132 +1,167 @@
-.whatsapp-float {
+/* ── FAB STACK CONTAINER ── */
+.fab-stack {
     position: fixed;
-    bottom: 25px;
-    right: 25px;
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-    border-radius: 50%;
+    bottom: 28px;
+    right: 28px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+/* ── SUB BUTTONS WRAPPER ── */
+.fab-sub-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px) scale(0.8);
+}
+
+.fab-stack.open .fab-sub-buttons {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0) scale(1);
+}
+
+/* ── SUB BUTTONS ── */
+.fab-sub {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px 10px 14px;
+    border-radius: 50px;
     border: none;
     cursor: pointer;
-    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
-    z-index: 9999;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: white;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    white-space: nowrap;
+}
+
+.fab-sub:hover {
+    transform: translateX(-4px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.wa-btn {
+    background: linear-gradient(135deg, #25D366, #128C7E);
+}
+
+.call-btn {
+    background: linear-gradient(135deg, #0077b6, #0096c7);
+}
+
+.fab-icon {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+}
+
+.fab-sub-label {
+    font-size: 0.88rem;
+    letter-spacing: 0.3px;
+}
+
+/* ── MAIN FAB BUTTON ── */
+.fab-main {
+    position: relative;
+    width: 62px;
+    height: 62px;
+    background: linear-gradient(135deg, #0077b6, #00b4d8);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    animation: bounceIn 0.8s ease-out, pulse 2s infinite 1s;
+    box-shadow: 0 8px 24px rgba(0, 119, 182, 0.5);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: fabBounceIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.whatsapp-float:hover {
+.fab-main:hover {
     transform: scale(1.1);
-    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
+    box-shadow: 0 12px 32px rgba(0, 119, 182, 0.6);
 }
 
-.whatsapp-float:active {
+.fab-main:active {
     transform: scale(0.95);
 }
 
-.whatsapp-icon {
-    width: 32px;
-    height: 32px;
+.fab-stack.open .fab-main {
+    background: linear-gradient(135deg, #374151, #1f2937);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* Main icon */
+.fab-main-icon {
+    font-size: 1.6rem;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    line-height: 1;
     color: white;
 }
 
-.whatsapp-tooltip {
+.fab-main-icon.rotated {
+    transform: rotate(0deg);
+    font-size: 1.4rem;
+}
+
+/* Pulse ring */
+.fab-pulse-ring {
     position: absolute;
-    right: 70px;
-    background: #333;
-    color: white;
-    padding: 8px 15px;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 180, 216, 0.5);
+    animation: fabPulse 2.5s infinite;
     pointer-events: none;
 }
 
-.whatsapp-tooltip::after {
-    content: '';
-    position: absolute;
-    right: -6px;
-    top: 50%;
-    transform: translateY(-50%);
-    border: 6px solid transparent;
-    border-left-color: #333;
+/* ── ANIMATIONS ── */
+@keyframes fabBounceIn {
+    0%   { opacity: 0; transform: scale(0.3); }
+    60%  { opacity: 1; transform: scale(1.1); }
+    80%  { transform: scale(0.92); }
+    100% { transform: scale(1); }
 }
 
-.whatsapp-float:hover .whatsapp-tooltip {
-    opacity: 1;
-    visibility: visible;
-    right: 75px;
+@keyframes fabPulse {
+    0%   { transform: scale(1); opacity: 0.7; }
+    70%  { transform: scale(1.6); opacity: 0; }
+    100% { transform: scale(1.6); opacity: 0; }
 }
 
-@keyframes bounceIn {
-    0% {
-        opacity: 0;
-        transform: scale(0.3);
-    }
-
-    50% {
-        opacity: 1;
-        transform: scale(1.05);
-    }
-
-    70% {
-        transform: scale(0.9);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-@keyframes pulse {
-    0% {
-        box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
-    }
-
-    50% {
-        box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4), 0 0 0 10px rgba(37, 211, 102, 0.1);
-    }
-
-    100% {
-        box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4), 0 0 0 20px rgba(37, 211, 102, 0);
-    }
-}
-
-/* Mobile Responsive */
+/* ── MOBILE ── */
 @media (max-width: 768px) {
-    .whatsapp-float {
+    .fab-stack {
         bottom: 20px;
-        right: 20px;
-        width: 55px;
-        height: 55px;
+        right: 18px;
     }
 
-    .whatsapp-icon {
-        width: 28px;
-        height: 28px;
+    .fab-main {
+        width: 56px;
+        height: 56px;
     }
 
-    .whatsapp-tooltip {
-        display: none;
-    }
-}
-
-@media (max-width: 480px) {
-    .whatsapp-float {
-        bottom: 15px;
-        right: 15px;
-        width: 50px;
-        height: 50px;
+    .fab-main-icon {
+        font-size: 1.4rem;
     }
 
-    .whatsapp-icon {
-        width: 26px;
-        height: 26px;
+    .fab-sub {
+        padding: 9px 16px 9px 12px;
+        font-size: 0.85rem;
+    }
+
+    .fab-icon {
+        width: 18px;
+        height: 18px;
     }
 }

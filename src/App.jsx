@@ -1,27 +1,64 @@
-import { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import './App.css'
+import AnnouncementTicker from './components/AnnouncementTicker/AnnouncementTicker'
 import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
 import HeroSlider from './components/HeroSlider/HeroSlider'
 import Products from './components/Products/Products'
+import RateCalculator from './components/RateCalculator/RateCalculator'
 import CollectionStats from './components/CollectionStats/CollectionStats'
 import Gallery from './components/Gallery/Gallery'
 import WhatsAppButton from './components/WhatsAppButton/WhatsAppButton'
+import AdminPanel from './components/AdminPanel/AdminPanel'
 import { useLanguage } from './context/LanguageContext'
 import { translations } from './translations/translations'
 
 function App() {
   const { language } = useLanguage();
   const t = translations[language].features;
+  
+  const [isAdminPanelOpen, setIsAdminPanelOpen] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const clickTimer = useRef(null);
+  const [, setClickCount] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setShowScrollTop(window.scrollY > 500);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleLogoClick = () => {
+    setClickCount((prev) => {
+      const newCount = prev + 1;
+      if (newCount === 5) {
+        setIsAdminPanelOpen(true);
+        return 0;
+      }
+      return newCount;
+    });
+    clearTimeout(clickTimer.current);
+    clickTimer.current = setTimeout(() => {
+      setClickCount(0);
+    }, 2000);
+  };
 
   return (
     <div id="home" className="app-wrapper">
-      <Navbar />
+      {isAdminPanelOpen && <AdminPanel onClose={() => setIsAdminPanelOpen(false)} />}
+      <AnnouncementTicker />
+      <Navbar onLogoClick={handleLogoClick} />
 
       <HeroSlider />
 
+      <div className="section-divider"></div>
       <Products />
+      
+      <div className="section-divider"></div>
+      <RateCalculator />
 
+      {/* 
+      <div className="section-divider"></div>
       <section className="features-section">
         <div className="section-title">
           <h2>{t.title}</h2>
@@ -51,14 +88,25 @@ function App() {
           </div>
         </div>
       </section>
-
+      */}
       <CollectionStats />
 
+      <div className="section-divider"></div>
       <Gallery />
 
       <Footer />
 
       <WhatsAppButton />
+
+      {showScrollTop && (
+        <button
+          className="scroll-top-btn"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          aria-label="Scroll to top"
+        >
+          ↑
+        </button>
+      )}
     </div>
   )
 }

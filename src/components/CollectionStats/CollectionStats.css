@@ -1,5 +1,5 @@
 .stats-section {
-    padding: 100px 5%;
+    padding: 100px 5% 40px;
     background: #fffcf9;
     position: relative;
     overflow: hidden;
@@ -234,7 +234,7 @@
 
 /* Tradition Segment */
 .tradition-segment {
-    margin-bottom: 80px;
+    margin-bottom: 0;
     background: white;
     border-radius: 40px;
     padding: 50px;

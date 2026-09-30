@@ -3,7 +3,7 @@ import './Navbar.css';
 import { useLanguage } from '../../context/LanguageContext';
 import { translations } from '../../translations/translations';
 
-const Navbar = () => {
+const Navbar = ({ onLogoClick }) => {
     const [scrolled, setScrolled] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const { language, setLanguage } = useLanguage();
@@ -30,7 +30,14 @@ const Navbar = () => {
         <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
             <div className="navbar-container">
                 <div className="logo" onClick={() => document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' })}>
-                    <span className="logo-icon">🥛</span>
+                    <span 
+                        className="logo-icon" 
+                        onClick={(e) => {
+                            e.stopPropagation(); // Prevent scroll to top if just clicking icon
+                            if (onLogoClick) onLogoClick();
+                        }}
+                        style={{ cursor: 'pointer' }}
+                    >🥛</span>
                     <span className="logo-text">{t.logoText} <span>{t.location}</span></span>
                 </div>
 
@@ -40,8 +47,14 @@ const Navbar = () => {
                         document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
                         setIsOpen(false);
                     }}>{t.home}</a>
+                    <a href="#products" className="nav-item" onClick={() => setIsOpen(false)}>{translations[language].hero.btns.products}</a>
                     <a href="#predictions" className="nav-item" onClick={() => setIsOpen(false)}>{t.predictions}</a>
-                    <a href="#collections" className="nav-item" onClick={() => setIsOpen(false)}>{t.collections}</a>
+                    <a href="#calculator" className="nav-item" onClick={() => setIsOpen(false)}>{translations[language].calculator.titleSpan}</a>
+                    <a href="#collections" className="nav-item" onClick={() => setIsOpen(false)}>{t.gallery}</a>
+
+                    <a href="tel:+919764803128" className="btn-nav-call">
+                        📞 9764803128
+                    </a>
 
                     <div className="lang-switcher">
                         <button
