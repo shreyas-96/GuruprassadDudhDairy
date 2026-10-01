@@ -4,6 +4,36 @@
   text-align: left;
 }
 
+/* Offset for the fixed AnnouncementTicker (42px) + fixed Navbar (75px) = 117px */
+html {
+  scroll-padding-top: 117px;
+}
+
+/* Spacer that pushes page content below the two fixed top bars */
+.navbar-offset {
+  padding-top: 117px;
+}
+
+@media (max-width: 768px) {
+  /* Mobile: ticker 42px + navbar 70px = 112px */
+  html {
+    scroll-padding-top: 112px;
+  }
+  .navbar-offset {
+    padding-top: 112px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Mobile small: ticker 42px + navbar 65px = 107px */
+  html {
+    scroll-padding-top: 107px;
+  }
+  .navbar-offset {
+    padding-top: 107px;
+  }
+}
+
 .app-wrapper {
   overflow-x: hidden;
 }

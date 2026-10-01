@@ -16,7 +16,7 @@ import { translations } from './translations/translations'
 function App() {
   const { language } = useLanguage();
   const t = translations[language].features;
-  
+
   const [isAdminPanelOpen, setIsAdminPanelOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const clickTimer = useRef(null);
@@ -44,20 +44,25 @@ function App() {
   };
 
   return (
-    <div id="home" className="app-wrapper">
+    <div className="app-wrapper">
       {isAdminPanelOpen && <AdminPanel onClose={() => setIsAdminPanelOpen(false)} />}
       <AnnouncementTicker />
       <Navbar onLogoClick={handleLogoClick} />
 
-      <HeroSlider />
+      {/* Offset spacer so fixed Ticker (42px) + Navbar (75px) = 117px doesn't cover content */}
+      <div className="navbar-offset">
 
-      <div className="section-divider"></div>
-      <Products />
-      
-      <div className="section-divider"></div>
-      <RateCalculator />
+        <div id="home">
+          <HeroSlider />
+        </div>
 
-      {/* 
+        <div className="section-divider"></div>
+        <Products />
+
+        <div className="section-divider"></div>
+        <RateCalculator />
+
+        {/* 
       <div className="section-divider"></div>
       <section className="features-section">
         <div className="section-title">
@@ -89,12 +94,14 @@ function App() {
         </div>
       </section>
       */}
-      <CollectionStats />
+        <CollectionStats />
 
-      <div className="section-divider"></div>
-      <Gallery />
+        <div className="section-divider"></div>
+        <Gallery />
 
-      <Footer />
+        <Footer />
+
+      </div> {/* end navbar-offset */}
 
       <WhatsAppButton />
 
