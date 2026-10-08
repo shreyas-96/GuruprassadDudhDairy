@@ -13,6 +13,14 @@ const Footer = () => {
     const morningTime = collection?.morning?.time || '8:30 AM - 10:00 AM';
     const eveningTime = collection?.evening?.time || '6:30 PM - 8:00 PM';
 
+    const scrollToId = (id) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const offset = 124;
+        const top = el.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+    };
+
     return (
         <footer id="footer" className="footer">
             <div className="footer-glow"></div>
@@ -42,11 +50,11 @@ const Footer = () => {
                     <div className="footer-links-col">
                         <h4>{t.quickLinks}</h4>
                         <ul>
-                            <li><a href="#home" onClick={(e) => { e.preventDefault(); document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' }); }}>🏠 {t.linkHome}</a></li>
-                            <li><a href="#products" onClick={(e) => { e.preventDefault(); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }); }}>🥛 {t.linkProducts}</a></li>
-                            <li><a href="#calculator" onClick={(e) => { e.preventDefault(); document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth' }); }}>🧮 {t.linkCalculator}</a></li>
-                            <li><a href="#predictions" onClick={(e) => { e.preventDefault(); document.getElementById('predictions')?.scrollIntoView({ behavior: 'smooth' }); }}>📊 {t.linkCollectionBoard}</a></li>
-                            <li><a href="#collections" onClick={(e) => { e.preventDefault(); document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' }); }}>🖼️ {t.linkGallery}</a></li>
+                            <li><a href="#home" onClick={(e) => { e.preventDefault(); scrollToId('home'); }}>🏠 {t.linkHome}</a></li>
+                            <li><a href="#products" onClick={(e) => { e.preventDefault(); scrollToId('products'); }}>🥛 {t.linkProducts}</a></li>
+                            <li><a href="#calculator" onClick={(e) => { e.preventDefault(); scrollToId('calculator'); }}>🧮 {t.linkCalculator}</a></li>
+                            <li><a href="#collections" onClick={(e) => { e.preventDefault(); scrollToId('collections'); }}>📊 {t.linkCollectionBoard}</a></li>
+                            <li><a href="#gallery" onClick={(e) => { e.preventDefault(); scrollToId('gallery'); }}>🖼️ {t.linkGallery}</a></li>
                         </ul>
                     </div>
 

@@ -14,9 +14,8 @@ const CollectionStats = () => {
     const data = collection;
     const currentData = data[activeTab];
 
-
     return (
-        <section id="predictions" className="stats-section">
+        <section id="collections" className="stats-section">
             <div className="traditional-pattern"></div>
 
             <div className="container">

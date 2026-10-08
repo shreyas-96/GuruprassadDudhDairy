@@ -10,12 +10,12 @@ const Gallery = () => {
     const t = translations[language].galleryBoard;
 
     const images = [
-        { src: '/gallery-1.jpg.png', title: 'Milk Collection & Testing' },
-        { src: '/gallery-2.jpg.png', title: 'Digital Weight Scale' },
-        { src: '/gallery-3.jpg.png', title: 'Fresh Dairy Stock' },
-        { src: '/gallery-4.jpg.png', title: 'Pure Cattle Care' },
-        { src: '/gallery-5.jpg.png', title: 'Hygienic Milk Storage' },
-        { src: '/gallery-6.jpg.png', title: 'Mouje Agar Center' }
+        { src: '/gallery-1.jpg.png', title: t.items?.[0] || 'Milk Collection & Testing' },
+        { src: '/gallery-2.jpg.png', title: t.items?.[1] || 'Digital Weight Scale' },
+        { src: '/gallery-3.jpg.png', title: t.items?.[2] || 'Fresh Dairy Stock' },
+        { src: '/gallery-4.jpg.png', title: t.items?.[3] || 'Pure Cattle Care' },
+        { src: '/gallery-5.jpg.png', title: t.items?.[4] || 'Hygienic Milk Storage' },
+        { src: '/gallery-6.jpg.png', title: t.items?.[5] || 'Mouje Agar Center' }
     ];
 
     useEffect(() => {
@@ -37,7 +37,7 @@ const Gallery = () => {
     };
 
     return (
-        <section id="collections" className="gallery-section">
+        <section id="gallery" className="gallery-section">
             <div className="container">
                 <div className="section-header">
                     <span className="subtitle">{t.subtitle}</span>

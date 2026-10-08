@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './RateCalculator.css';
 import { useLanguage } from '../../context/LanguageContext';
 import { useAdmin } from '../../context/AdminContext';
@@ -11,14 +11,11 @@ const RateCalculator = () => {
 
     const [milkType, setMilkType] = useState('cow'); // 'cow' or 'buffalo'
     const [liters, setLiters] = useState(10);
-    const [fat, setFat] = useState(settings.cow.baseFat);
-
-    useEffect(() => {
-        setFat(settings[milkType].baseFat);
-    }, [milkType, settings]);
+    const [fat, setFat] = useState(() => settings.cow.baseFat);
 
     const handleTypeChange = (type) => {
         setMilkType(type);
+        setFat(settings[type].baseFat);
     };
 
     // Calculate Rate per liter using Admin settings

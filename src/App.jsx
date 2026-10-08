@@ -11,11 +11,9 @@ import Gallery from './components/Gallery/Gallery'
 import WhatsAppButton from './components/WhatsAppButton/WhatsAppButton'
 import AdminPanel from './components/AdminPanel/AdminPanel'
 import { useLanguage } from './context/LanguageContext'
-import { translations } from './translations/translations'
 
 function App() {
-  const { language } = useLanguage();
-  const t = translations[language].features;
+  useLanguage(); // ensure context consumer hook runs cleanly
 
   const [isAdminPanelOpen, setIsAdminPanelOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -25,7 +23,10 @@ function App() {
   useEffect(() => {
     const handleScroll = () => setShowScrollTop(window.scrollY > 500);
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (clickTimer.current) clearTimeout(clickTimer.current);
+    };
   }, []);
 
   const handleLogoClick = () => {
@@ -33,11 +34,12 @@ function App() {
       const newCount = prev + 1;
       if (newCount === 5) {
         setIsAdminPanelOpen(true);
+        if (clickTimer.current) clearTimeout(clickTimer.current);
         return 0;
       }
       return newCount;
     });
-    clearTimeout(clickTimer.current);
+    if (clickTimer.current) clearTimeout(clickTimer.current);
     clickTimer.current = setTimeout(() => {
       setClickCount(0);
     }, 2000);

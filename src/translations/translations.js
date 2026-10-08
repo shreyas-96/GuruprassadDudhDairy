@@ -2,8 +2,9 @@ export const translations = {
     en: {
         navbar: {
             home: "Home",
-            predictions: "Predictions",
-            collections: "Collections",
+            products: "Products",
+            calculator: "Rate Calculator",
+            collections: "Collection Board",
             gallery: "Gallery",
             logoText: "Guruprasad Dudh Dairy,",
             location: "Mouje Agar"
@@ -105,7 +106,15 @@ export const translations = {
             subtitle: "Our Daily Collections",
             title: "Our ",
             titleSpan: "Premium Gallery",
-            desc: "Real glimpses of our daily collections and farm purity."
+            desc: "Real glimpses of our daily collections and farm purity.",
+            items: [
+                "Milk Collection & Testing",
+                "Digital Weight Scale",
+                "Fresh Dairy Stock",
+                "Pure Cattle Care",
+                "Hygienic Milk Storage",
+                "Mouje Agar Center"
+            ]
         },
         calculator: {
             title: "Smart Milk ",
@@ -161,8 +170,9 @@ export const translations = {
     mr: {
         navbar: {
             home: "मुख्य पान",
-            predictions: "अंदाज",
-            collections: "संकलन",
+            products: "उत्पादने",
+            calculator: "दर मोजणी",
+            collections: "संकलन फलक",
             gallery: "गॅलरी",
             logoText: "गुरुप्रसाद दुध डेअरी,",
             location: "मौजे आगर"
@@ -264,7 +274,15 @@ export const translations = {
             subtitle: "आमचे दैनंदिन संकलन",
             title: "आमची ",
             titleSpan: "प्रीमियम गॅलरी",
-            desc: "आमच्या दैनंदिन संकलनाचे और शेतातील शुद्धतेचे वास्तविक दर्शन."
+            desc: "आमच्या दैनंदिन संकलनाचे आणि शेतातील शुद्धतेचे वास्तव दर्शन.",
+            items: [
+                "दुध संकलन आणि तपासणी",
+                "डिजिटल वजन काटा",
+                "ताजा दुध साठा",
+                "गुरांची दर्जेदार काळजी",
+                "आरोग्यदायी दुध साठवणूक",
+                "मौजे आगर संकलन केंद्र"
+            ]
         },
         calculator: {
             title: "स्मार्ट दुध ",

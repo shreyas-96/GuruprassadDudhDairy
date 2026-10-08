@@ -41,11 +41,12 @@ const HeroSlider = () => {
         setCurrent(current === 0 ? slides.length - 1 : current - 1);
     };
 
-    const scrollToProducts = () => {
-        const productsSection = document.getElementById('products');
-        if (productsSection) {
-            productsSection.scrollIntoView({ behavior: 'smooth' });
-        }
+    const scrollToId = (id) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const offset = 124;
+        const top = el.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
     };
 
     return (
@@ -65,10 +66,10 @@ const HeroSlider = () => {
                         <h1 className="slide-title">{slide.title}</h1>
                         <p className="slide-description">{slide.description}</p>
                         <div className="slide-actions">
-                            <button className="btn-slider-primary" onClick={scrollToProducts}>
+                            <button className="btn-slider-primary" onClick={() => scrollToId('products')}>
                                 {t.btns.products}
                             </button>
-                            <button className="btn-slider-secondary" onClick={() => document.getElementById('footer')?.scrollIntoView({ behavior: 'smooth' })}>
+                            <button className="btn-slider-secondary" onClick={() => scrollToId('footer')}>
                                 {t.btns.contact}
                             </button>
                         </div>

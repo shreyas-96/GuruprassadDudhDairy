@@ -35,29 +35,66 @@ const AdminPanel = ({ onClose }) => {
     };
 
     const handleRateChange = (type, field, value) => {
+        const isStringField = field === 'fatRange' || field === 'snfRange';
+        const parsedValue = isStringField
+            ? value
+            : (value === '' ? '' : (isNaN(parseFloat(value)) ? value : parseFloat(value)));
+
         setRateForm((prev) => ({
             ...prev,
-            [type]: { ...prev[type], [field]: parseFloat(value) || value }
+            [type]: { ...prev[type], [field]: parsedValue }
         }));
     };
 
     const handleCollectionChange = (session, field, value) => {
         setCollectionForm((prev) => {
-            const updated = {
-                ...prev,
-                [session]: { ...prev[session], [field]: field === 'time' ? value : (parseInt(value) || 0) }
-            };
-            // Auto-calculate total
+            const isTime = field === 'time';
+            const parsedVal = isTime
+                ? value
+                : (value === '' ? '' : (isNaN(parseInt(value, 10)) ? 0 : parseInt(value, 10)));
+
+            const updatedSession = { ...prev[session], [field]: parsedVal };
+
             if (field === 'buffalo' || field === 'cow') {
-                updated[session].total = (updated[session].buffalo || 0) + (updated[session].cow || 0);
+                const buf = typeof updatedSession.buffalo === 'number' ? updatedSession.buffalo : (parseInt(updatedSession.buffalo, 10) || 0);
+                const cow = typeof updatedSession.cow === 'number' ? updatedSession.cow : (parseInt(updatedSession.cow, 10) || 0);
+                updatedSession.total = buf + cow;
             }
-            return updated;
+
+            return {
+                ...prev,
+                [session]: updatedSession
+            };
         });
     };
 
     const handleSave = () => {
-        updateSettings(rateForm);
-        updateCollection(collectionForm);
+        const cleanRateForm = { ...rateForm };
+        ['cow', 'buffalo'].forEach((type) => {
+            cleanRateForm[type] = {
+                ...cleanRateForm[type],
+                price: Number(cleanRateForm[type].price) || 0,
+                baseFat: Number(cleanRateForm[type].baseFat) || 0,
+                baseRate: Number(cleanRateForm[type].baseRate) || 0,
+                fatRateMultiplier: Number(cleanRateForm[type].fatRateMultiplier) || 0,
+                snfBase: Number(cleanRateForm[type].snfBase) || 0,
+            };
+        });
+
+        const cleanCollectionForm = { ...collectionForm };
+        ['morning', 'evening'].forEach((session) => {
+            const buf = Number(cleanCollectionForm[session].buffalo) || 0;
+            const cow = Number(cleanCollectionForm[session].cow) || 0;
+            cleanCollectionForm[session] = {
+                ...cleanCollectionForm[session],
+                buffalo: buf,
+                cow: cow,
+                total: buf + cow,
+            };
+        });
+
+        updateSettings(cleanRateForm);
+        updateCollection(cleanCollectionForm);
         alert('✅ All settings saved successfully!');
         onClose();
     };
@@ -276,7 +313,7 @@ const AdminPanel = ({ onClose }) => {
                             ))}
                             <div className="daily-total-banner">
                                 <span>📦 Grand Daily Total:</span>
-                                <strong>₹ {collectionForm.morning.total + collectionForm.evening.total} Liters</strong>
+                                <strong>🥛 {(Number(collectionForm.morning.total) || 0) + (Number(collectionForm.evening.total) || 0)} Liters</strong>
                             </div>
                         </div>
                     )}
