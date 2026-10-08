@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './RateCalculator.css';
 import { useLanguage } from '../../context/LanguageContext';
 import { useAdmin } from '../../context/AdminContext';
@@ -11,19 +11,29 @@ const RateCalculator = () => {
 
     const [milkType, setMilkType] = useState('cow'); // 'cow' or 'buffalo'
     const [liters, setLiters] = useState(10);
-    const [fat, setFat] = useState(() => settings.cow.baseFat);
+    const [fat, setFat] = useState(() => settings.cow?.baseFat || 3.5);
+
+    // Sync fat state whenever milkType or settings (e.g. from AdminPanel) change
+    useEffect(() => {
+        if (settings && settings[milkType]) {
+            setFat(settings[milkType].baseFat);
+        }
+    }, [milkType, settings]);
 
     const handleTypeChange = (type) => {
         setMilkType(type);
-        setFat(settings[type].baseFat);
+        if (settings && settings[type]) {
+            setFat(settings[type].baseFat);
+        }
     };
 
     // Calculate Rate per liter using Admin settings
     const calculateRate = () => {
         const typeSettings = settings[milkType];
-        const baseRate = typeSettings.baseRate;
-        const baseFat = typeSettings.baseFat;
-        const multiplier = typeSettings.fatRateMultiplier;
+        if (!typeSettings) return 0;
+        const baseRate = typeSettings.baseRate ?? typeSettings.price ?? 0;
+        const baseFat = typeSettings.baseFat ?? 3.5;
+        const multiplier = typeSettings.fatRateMultiplier ?? 0;
         
         // Example: if fat is 4.0, base is 3.5, diff = (4.0 - 3.5) * 6
         const diff = (fat - baseFat) * multiplier;
@@ -32,7 +42,9 @@ const RateCalculator = () => {
 
     const ratePerLiter = calculateRate();
     const totalPayout = Math.round(liters * ratePerLiter);
-    const estSNF = (fat * 0.2 + settings[milkType].snfBase - (settings[milkType].baseFat * 0.2)).toFixed(1);
+    const currentSnfBase = settings[milkType]?.snfBase ?? (milkType === 'cow' ? 7.9 : 8.4);
+    const currentBaseFat = settings[milkType]?.baseFat ?? (milkType === 'cow' ? 3.5 : 6.0);
+    const estSNF = (fat * 0.2 + currentSnfBase - (currentBaseFat * 0.2)).toFixed(1);
 
     const shareOnWhatsapp = () => {
         const text = `🥛 Guruprasad Dairy Rate Estimate:\n• Type: ${milkType === 'cow' ? t.cow : t.buffalo}\n• Quantity: ${liters} L\n• Fat: ${fat}%\n• Est. SNF: ${estSNF}%\n• Rate/L: ₹${ratePerLiter}\n• Total Payout: ₹${totalPayout}`;

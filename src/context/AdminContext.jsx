@@ -45,7 +45,13 @@ export const AdminProvider = ({ children }) => {
     const [settings, setSettings] = useState(() => {
         const saved = localStorage.getItem('dairy_admin_settings');
         if (saved) {
-            try { return JSON.parse(saved); } catch { return defaultSettings; }
+            try {
+                const parsed = JSON.parse(saved);
+                return {
+                    cow: { ...defaultSettings.cow, ...parsed.cow, baseRate: parsed.cow?.baseRate ?? parsed.cow?.price ?? defaultSettings.cow.baseRate },
+                    buffalo: { ...defaultSettings.buffalo, ...parsed.buffalo, baseRate: parsed.buffalo?.baseRate ?? parsed.buffalo?.price ?? defaultSettings.buffalo.baseRate }
+                };
+            } catch { return defaultSettings; }
         }
         return defaultSettings;
     });
@@ -53,7 +59,13 @@ export const AdminProvider = ({ children }) => {
     const [collection, setCollection] = useState(() => {
         const saved = localStorage.getItem('dairy_admin_collection');
         if (saved) {
-            try { return JSON.parse(saved); } catch { return defaultCollection; }
+            try {
+                const parsed = JSON.parse(saved);
+                return {
+                    morning: { ...defaultCollection.morning, ...parsed.morning },
+                    evening: { ...defaultCollection.evening, ...parsed.evening }
+                };
+            } catch { return defaultCollection; }
         }
         return defaultCollection;
     });
@@ -73,6 +85,37 @@ export const AdminProvider = ({ children }) => {
     useEffect(() => {
         sessionStorage.setItem('dairy_admin_auth', isAuthenticated);
     }, [isAuthenticated]);
+
+    // Listen to storage events to sync across tabs/windows in real time
+    useEffect(() => {
+        const handleStorageChange = (e) => {
+            if (e.key === 'dairy_admin_settings' && e.newValue) {
+                try {
+                    const parsed = JSON.parse(e.newValue);
+                    setSettings({
+                        cow: { ...defaultSettings.cow, ...parsed.cow, baseRate: parsed.cow?.baseRate ?? parsed.cow?.price ?? defaultSettings.cow.baseRate },
+                        buffalo: { ...defaultSettings.buffalo, ...parsed.buffalo, baseRate: parsed.buffalo?.baseRate ?? parsed.buffalo?.price ?? defaultSettings.buffalo.baseRate }
+                    });
+                } catch (err) {
+                    console.error('Storage sync error:', err);
+                }
+            }
+            if (e.key === 'dairy_admin_collection' && e.newValue) {
+                try {
+                    const parsed = JSON.parse(e.newValue);
+                    setCollection({
+                        morning: { ...defaultCollection.morning, ...parsed.morning },
+                        evening: { ...defaultCollection.evening, ...parsed.evening }
+                    });
+                } catch (err) {
+                    console.error('Storage sync error:', err);
+                }
+            }
+        };
+
+        window.addEventListener('storage', handleStorageChange);
+        return () => window.removeEventListener('storage', handleStorageChange);
+    }, []);
 
     const updateSettings = (newSettings) => setSettings(newSettings);
     const updateCollection = (newCollection) => setCollection(newCollection);

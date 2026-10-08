@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './AdminPanel.css';
 import { useAdmin } from '../../context/AdminContext';
 
@@ -12,6 +12,11 @@ const AdminPanel = ({ onClose }) => {
 
     const [rateForm, setRateForm] = useState(settings);
     const [collectionForm, setCollectionForm] = useState(collection);
+
+    useEffect(() => {
+        setRateForm(settings);
+        setCollectionForm(collection);
+    }, [settings, collection]);
 
     const handlePhoneChange = (e) => {
         const value = e.target.value.replace(/\D/g, ''); // keep only numbers
@@ -40,10 +45,19 @@ const AdminPanel = ({ onClose }) => {
             ? value
             : (value === '' ? '' : (isNaN(parseFloat(value)) ? value : parseFloat(value)));
 
-        setRateForm((prev) => ({
-            ...prev,
-            [type]: { ...prev[type], [field]: parsedValue }
-        }));
+        setRateForm((prev) => {
+            const updatedType = { ...prev[type], [field]: parsedValue };
+            // Synchronize price and baseRate so changing rate in admin updates both Products and Payout Calculator
+            if (field === 'price') {
+                updatedType.baseRate = parsedValue;
+            } else if (field === 'baseRate') {
+                updatedType.price = parsedValue;
+            }
+            return {
+                ...prev,
+                [type]: updatedType
+            };
+        });
     };
 
     const handleCollectionChange = (session, field, value) => {
@@ -71,11 +85,13 @@ const AdminPanel = ({ onClose }) => {
     const handleSave = () => {
         const cleanRateForm = { ...rateForm };
         ['cow', 'buffalo'].forEach((type) => {
+            const priceVal = Number(cleanRateForm[type].price) || 0;
+            const baseRateVal = Number(cleanRateForm[type].baseRate) || priceVal;
             cleanRateForm[type] = {
                 ...cleanRateForm[type],
-                price: Number(cleanRateForm[type].price) || 0,
+                price: priceVal,
                 baseFat: Number(cleanRateForm[type].baseFat) || 0,
-                baseRate: Number(cleanRateForm[type].baseRate) || 0,
+                baseRate: baseRateVal,
                 fatRateMultiplier: Number(cleanRateForm[type].fatRateMultiplier) || 0,
                 snfBase: Number(cleanRateForm[type].snfBase) || 0,
             };
