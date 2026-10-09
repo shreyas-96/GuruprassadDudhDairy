@@ -61,8 +61,8 @@ function App() {
         <div className="section-divider"></div>
         <Products />
 
-        <div className="section-divider"></div>
-        <RateCalculator />
+        {/* <div className="section-divider"></div> */}
+        {/* <RateCalculator /> */}
 
         {/* 
       <div className="section-divider"></div>

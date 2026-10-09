@@ -52,7 +52,6 @@ const Footer = () => {
                         <ul>
                             <li><a href="#home" onClick={(e) => { e.preventDefault(); scrollToId('home'); }}>🏠 {t.linkHome}</a></li>
                             <li><a href="#products" onClick={(e) => { e.preventDefault(); scrollToId('products'); }}>🥛 {t.linkProducts}</a></li>
-                            <li><a href="#calculator" onClick={(e) => { e.preventDefault(); scrollToId('calculator'); }}>🧮 {t.linkCalculator}</a></li>
                             <li><a href="#collections" onClick={(e) => { e.preventDefault(); scrollToId('collections'); }}>📊 {t.linkCollectionBoard}</a></li>
                             <li><a href="#gallery" onClick={(e) => { e.preventDefault(); scrollToId('gallery'); }}>🖼️ {t.linkGallery}</a></li>
                         </ul>

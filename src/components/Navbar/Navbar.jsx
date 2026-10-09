@@ -26,7 +26,7 @@ const Navbar = ({ onLogoClick }) => {
 
     // IntersectionObserver to detect active section while scrolling
     useEffect(() => {
-        const sections = ['home', 'products', 'calculator', 'collections', 'gallery'];
+        const sections = ['home', 'products', 'collections', 'gallery'];
         const offset = NAVBAR_HEIGHT + TICKER_HEIGHT;
 
         const observers = [];
@@ -79,7 +79,6 @@ const Navbar = ({ onLogoClick }) => {
     const navItems = [
         { id: 'home', label: t.home },
         { id: 'products', label: t.products },
-        { id: 'calculator', label: t.calculator },
         { id: 'collections', label: t.collections },
         { id: 'gallery', label: t.gallery },
     ];
